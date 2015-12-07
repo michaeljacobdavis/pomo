@@ -3,12 +3,13 @@
 
 const electron = require('electron');
 const Positioner = require('electron-positioner');
-const path = require('path');
 const events = require('events');
+const path = require('path');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const crashReporter = electron.crashReporter;
+const ipc = electron.ipcMain;
 const internals = new events.EventEmitter();
 
 
@@ -29,6 +30,10 @@ app.on('ready', () => {
   // Handle close
   internals.window.on('closed', () => {
     internals.window = null;
+  });
+
+  ipc.on('title', (event, arg) => {
+    internals.tray.setTitle(arg);
   });
 
   internals.positioner = new Positioner(internals.window);
