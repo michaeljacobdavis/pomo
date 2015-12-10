@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Counter.module.css';
-import { miliToMin, minToMili, formatTime } from '../../common/helpers';
+import { miliToMin, minToMili } from '../../common/helpers/conversion';
+import formatTime from '../../common/helpers/format-time';
 
 class Counter extends Component {
   static propTypes = {

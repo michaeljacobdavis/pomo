@@ -1,10 +1,10 @@
-/* eslint strict: 0 */
 'use strict';
 
 const electron = require('electron');
 const Positioner = require('electron-positioner');
 const events = require('events');
 const path = require('path');
+const formatTime = require('./common/helpers/format-time');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
@@ -32,8 +32,21 @@ app.on('ready', () => {
     internals.window = null;
   });
 
-  ipc.on('title', (event, arg) => {
-    internals.tray.setTitle(arg);
+  // TODO: Move this out and clean up
+  ipc.on('timer.start', (event, state) => {
+    internals.interval = setInterval(() => {
+      const timestamp = new Date().getTime();
+      event.sender.send('timer.tick', timestamp);
+      internals.tray.setTitle(formatTime(state.counter.duration - (timestamp - state.counter.start)));
+    }, 1000);
+  });
+
+  ipc.on('timer.stop', () => {
+    clearInterval(internals.interval);
+  });
+
+  ipc.on('timer.duration', (event, state) => {
+    internals.duration = state.duration;
   });
 
   internals.positioner = new Positioner(internals.window);

@@ -7,24 +7,14 @@ export function setDuration(payload) {
   return { type: SET_DURATION, payload };
 }
 
-export function timerStart(delay = 1000) {
-  return (dispatch, getState) => {
-    let { timer } = getState().counter;
-    if (!timer) {
-      timer = setInterval(() => {
-        dispatch({type: TIMER_TICK});
-      }, delay);
-      dispatch({type: TIMER_START, payload: timer});
-    }
-  };
+export function tick(payload) {
+  return { type: TIMER_TICK, payload };
+}
+
+export function timerStart() {
+  return { type: TIMER_START };
 }
 
 export function timerStop() {
-  return (dispatch, getState) => {
-    const { timer } = getState().counter;
-    if (timer) {
-      clearInterval(timer);
-      dispatch({type: TIMER_STOP});
-    }
-  };
+  return { type: TIMER_STOP };
 }

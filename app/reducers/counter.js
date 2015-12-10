@@ -11,19 +11,17 @@ export default function counter(state = initialState, action) {
   switch (action.type) {
   case TIMER_START:
     return Object.assign({}, state, {
-      timer: action.payload,
       start: new Date().getTime(),
       current: new Date().getTime()
     });
   case TIMER_STOP:
     return Object.assign({}, state, {
-      timer: null,
       start: null,
       current: null
     });
   case TIMER_TICK:
     return Object.assign({}, state, {
-      current: new Date().getTime()
+      current: action.payload
     });
   case SET_DURATION:
     return Object.assign({}, state, {
