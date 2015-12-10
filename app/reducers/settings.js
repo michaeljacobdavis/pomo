@@ -1,14 +1,29 @@
-import { SET_DURATION } from '../actions/settings';
+import { SET_WORK_DURATION, SET_SHORT_BREAK_DURATION, SET_LONG_BREAK_DURATION, SET_SET_COUNT } from '../actions/settings';
 
 const initialState = {
-  duration: 25 * 60 * 1000
+  workDuration: 25 * 60 * 1000,
+  shortBreakDuration: 3 * 60 * 1000,
+  longBreakDuration: 15 * 60 * 1000,
+  setCount: 15 * 60 * 1000,
 };
 
 export default function counter(state = initialState, action) {
   switch (action.type) {
-  case SET_DURATION:
+  case SET_WORK_DURATION:
     return Object.assign({}, state, {
-      duration: action.payload
+      workDuration: action.payload
+    });
+  case SET_SHORT_BREAK_DURATION:
+    return Object.assign({}, state, {
+      shortBreakDuration: action.payload
+    });
+  case SET_LONG_BREAK_DURATION:
+    return Object.assign({}, state, {
+      longBreakDuration: action.payload
+    });
+  case SET_SET_COUNT:
+    return Object.assign({}, state, {
+      setCount: action.payload
     });
   default:
     return state;

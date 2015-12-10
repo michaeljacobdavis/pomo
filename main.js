@@ -1,68 +1,59 @@
 'use strict';
 
 const electron = require('electron');
-const Positioner = require('electron-positioner');
 const events = require('events');
+const WindowHandler = require('./main/window-handler');
 const path = require('path');
 const formatTime = require('./common/helpers/format-time');
+const counterActions = require('./common/action-types/counter');
+const settingsActions = require('./common/action-types/settings');
 const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const crashReporter = electron.crashReporter;
 const ipc = electron.ipcMain;
 const internals = new events.EventEmitter();
 
+internals.settings = {};
 
 require('electron-debug')();
 crashReporter.start();
-
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-
 app.on('ready', () => {
   internals.tray = new Tray(path.join(app.getAppPath(), 'IconTemplate.png'));
   let cachedBounds;
-  internals.window = createWindow();
+  let appUrl;
+
+  // Load app
+  if (process.env.HOT) {
+    appUrl = `file://${__dirname}/app/hot-dev-app.html`;
+  } else {
+    appUrl = `file://${__dirname}/app/app.html`;
+  }
+
+  internals.windowHandler = new WindowHandler(appUrl);
 
   // Handle close
-  internals.window.on('closed', () => {
-    internals.window = null;
+  internals.windowHandler.window.on('closed', () => {
+    internals.windowHandler = null;
   });
 
-  // TODO: Move this out and clean up
-  ipc.on('timer.start', (event, state) => {
-    internals.duration = state.settings.duration;
-    internals.interval = setInterval(() => {
-      const timestamp = new Date().getTime();
-      event.sender.send('timer.tick', timestamp);
-      internals.tray.setTitle(formatTime(internals.duration - (timestamp - state.counter.start)));
-    }, 1000);
-  });
-
-  ipc.on('timer.stop', () => {
-    clearInterval(internals.interval);
-  });
-
-  ipc.on('timer.duration', (event, state) => {
-    internals.duration = state.settings.duration;
-  });
-
-  internals.positioner = new Positioner(internals.window);
+  registerEvents(ipc);
 
   function click(e, bounds) {
     if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
-      return hideWindow();
+      return internals.windowHandler.hide();
     }
 
-    if (internals.window && internals.window.isVisible()) {
-      return hideWindow();
+    if (internals.windowHandler.window.isVisible()) {
+      return internals.windowHandler.hide();
     }
 
     cachedBounds = bounds || cachedBounds;
-    showWindow(cachedBounds);
+    internals.windowHandler.show(cachedBounds);
   }
 
   // Register tray events
@@ -77,51 +68,37 @@ app.on('ready', () => {
 });
 
 
-function createWindow() {
-  const window = new BrowserWindow({
-    // resizeable: false,
-    show: false,
-    frame: false,
-    width: 200,
-    height: 200
+function registerEvents(events) {
+  let cachedState;
+  let interval;
+
+  function settingsHandler(event, state) {
+    cachedState = state;
+  }
+
+  function updateTitle(timestamp) {
+    internals.tray.setTitle(formatTime(cachedState.settings.workDuration - (timestamp - cachedState.counter.start)));
+  }
+
+  events.on(counterActions.TIMER_START, (event, state) => {
+    settingsHandler(event, state);
+
+    interval = setInterval(() => {
+      const timestamp = new Date().getTime();
+      event.sender.send(counterActions.TIMER_TICK, timestamp);
+
+      updateTitle(timestamp);
+    }, 1000);
   });
 
-  if (process.env.NODE_ENV === 'production') {
-    // Handle loss of focus
-    window.on('blur', hideWindow);
-  }
+  events.on(counterActions.TIMER_STOP, (event, state) => {
+    settingsHandler(event, state);
+    internals.tray.setTitle('');
+    clearInterval(interval);
+  });
 
-  // Load app
-  if (process.env.HOT) {
-    window.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
-  } else {
-    window.loadURL(`file://${__dirname}/app/app.html`);
-  }
-
-  if (process.env.NODE_ENV === 'development') {
-    window.openDevTools();
-  }
-
-  return window;
-}
-
-function showWindow(trayPos) {
-  const windowPosition = (process.platform === 'win32') ? 'trayBottomCenter' : 'trayCenter';
-  let noBoundsPosition = null;
-
-  // Default the window to the right if `trayPos` bounds are undefined or null.
-  if ((typeof trayPos === 'undefined' || trayPos.x === 0) && windowPosition.substr(0, 4) === 'tray') {
-    noBoundsPosition = (process.platform === 'win32') ? 'bottomRight' : 'topRight';
-  }
-
-  const position = internals.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
-
-  internals.window.setPosition(position.x, position.y);
-  internals.window.show();
-  return;
-}
-
-function hideWindow() {
-  if (!internals.window) return;
-  internals.window.hide();
+  events.on(settingsActions.SET_WORK_DURATION, settingsHandler);
+  events.on(settingsActions.SET_SHORT_BREAK_DURATION, settingsHandler);
+  events.on(settingsActions.SET_LONG_BREAK_DURATION, settingsHandler);
+  events.on(settingsActions.SET_SET_COUNT, settingsHandler);
 }

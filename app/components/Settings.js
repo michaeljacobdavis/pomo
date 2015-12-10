@@ -4,24 +4,47 @@ import { Link } from 'react-router';
 
 class Settings extends Component {
   static propTypes = {
-    setDuration: PropTypes.func.isRequired,
+    setWorkDuration: PropTypes.func.isRequired,
+    setShortBreakDuration: PropTypes.func.isRequired,
+    setLongBreakDuration: PropTypes.func.isRequired,
+    setSetCount: PropTypes.func.isRequired,
     settings: PropTypes.object.isRequired
   };
 
 
-  setDuration(event) {
-    return this.props.setDuration(minToMili(parseFloat(event.target.value) || 0));
+  setTime(cb, event) {
+    return cb(minToMili(parseFloat(event.target.value) || 0));
   }
 
   render() {
-    const { settings } = this.props;
+    const { settings, setWorkDuration, setShortBreakDuration, setLongBreakDuration, setSetCount } = this.props;
 
     return (
       <div>
-        <input
-          type="text"
-          onChange={this.setDuration.bind(this)}
-          value={miliToMin(settings.duration)} />
+        <label>Work:
+          <input
+            type="text"
+            onChange={this.setTime.bind(setWorkDuration)}
+            value={miliToMin(settings.workDuration)} />
+        </label>
+        <label>Short Break:
+          <input
+            type="text"
+            onChange={this.setTime.bind(setShortBreakDuration)}
+            value={miliToMin(settings.shortBreakDuration)} />
+        </label>
+        <label>Long Break:
+          <input
+            type="text"
+            onChange={this.setTime.bind(setLongBreakDuration)}
+            value={miliToMin(settings.longBreakDuration)} />
+        </label>
+        <label>Set Count:
+          <input
+            type="text"
+            onChange={setSetCount}
+            value={miliToMin(settings.setCount)} />
+        </label>
           <Link to="/">Done</Link>
       </div>
     );

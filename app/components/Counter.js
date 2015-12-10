@@ -13,7 +13,7 @@ class Counter extends Component {
 
   render() {
     const { settings, counter, timerStart, timerStop } = this.props;
-    const time = formatTime(settings.duration - (counter.current - counter.start));
+    const time = formatTime(settings.workDuration - (counter.current - counter.start));
 
     return (
       <div>

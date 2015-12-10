@@ -1,4 +1,4 @@
-import { TIMER_START, TIMER_STOP, TIMER_TICK } from '../actions/counter';
+import { TIMER_START, TIMER_STOP, TIMER_TICK } from '../../common/action-types/counter';
 
 const initialState = {
   start: null,
