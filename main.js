@@ -34,10 +34,11 @@ app.on('ready', () => {
 
   // TODO: Move this out and clean up
   ipc.on('timer.start', (event, state) => {
+    internals.duration = state.settings.duration;
     internals.interval = setInterval(() => {
       const timestamp = new Date().getTime();
       event.sender.send('timer.tick', timestamp);
-      internals.tray.setTitle(formatTime(state.counter.duration - (timestamp - state.counter.start)));
+      internals.tray.setTitle(formatTime(internals.duration - (timestamp - state.counter.start)));
     }, 1000);
   });
 
@@ -46,7 +47,7 @@ app.on('ready', () => {
   });
 
   ipc.on('timer.duration', (event, state) => {
-    internals.duration = state.duration;
+    internals.duration = state.settings.duration;
   });
 
   internals.positioner = new Positioner(internals.window);

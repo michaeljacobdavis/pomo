@@ -1,4 +1,5 @@
-import { TIMER_START, TIMER_STOP, SET_DURATION, tick } from '../actions/counter';
+import { TIMER_START, TIMER_STOP, tick } from '../actions/counter';
+import { SET_DURATION } from '../actions/settings';
 import { ipcRenderer } from 'electron';
 
 const timer = (store) => {
@@ -18,7 +19,7 @@ const timer = (store) => {
       ipcRenderer.send('timer.stop');
       return result;
     case SET_DURATION:
-      ipcRenderer.send('timer.start', store.getState());
+      ipcRenderer.send('timer.duration', store.getState());
       return result;
     default:
       return result;
