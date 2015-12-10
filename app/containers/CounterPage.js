@@ -1,11 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Settings from '../components/Settings';
+import Counter from '../components/Counter';
 import * as CounterActions from '../actions/counter';
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
+    settings: state.settings
   };
 }
 

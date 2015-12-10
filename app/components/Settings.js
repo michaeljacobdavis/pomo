@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { miliToMin, minToMili } from '../../common/helpers';
+import { miliToMin, minToMili } from '../../common/helpers/conversion';
 import { Link } from 'react-router';
 
 class Settings extends Component {
   static propTypes = {
     setDuration: PropTypes.func.isRequired,
-    counter: PropTypes.object.isRequired
+    settings: PropTypes.object.isRequired
   };
 
 
@@ -14,14 +14,14 @@ class Settings extends Component {
   }
 
   render() {
-    const { counter } = this.props;
+    const { settings } = this.props;
 
     return (
       <div>
         <input
           type="text"
           onChange={this.setDuration.bind(this)}
-          value={miliToMin(counter.duration)} />
+          value={miliToMin(settings.duration)} />
           <Link to="/">Done</Link>
       </div>
     );

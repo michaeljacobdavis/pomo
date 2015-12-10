@@ -7,12 +7,13 @@ class Counter extends Component {
   static propTypes = {
     timerStart: PropTypes.func.isRequired,
     timerStop: PropTypes.func.isRequired,
-    counter: PropTypes.object.isRequired
+    counter: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired
   };
 
   render() {
-    const { counter, timerStart, timerStop } = this.props;
-    const time = formatTime(counter.duration - (counter.current - counter.start));
+    const { settings, counter, timerStart, timerStop } = this.props;
+    const time = formatTime(settings.duration - (counter.current - counter.start));
 
     return (
       <div>
