@@ -1,10 +1,9 @@
-import { TIMER_START, TIMER_STOP, TIMER_TICK, SET_DURATION } from '../actions/counter';
+import { TIMER_START, TIMER_STOP, TIMER_TICK } from '../actions/counter';
 
 const initialState = {
   start: null,
   current: null,
-  timer: null,
-  duration: 25 * 60 * 1000
+  timer: null
 };
 
 export default function counter(state = initialState, action) {
@@ -22,10 +21,6 @@ export default function counter(state = initialState, action) {
   case TIMER_TICK:
     return Object.assign({}, state, {
       current: action.payload
-    });
-  case SET_DURATION:
-    return Object.assign({}, state, {
-      duration: action.payload
     });
   default:
     return state;

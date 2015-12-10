@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Counter.module.css';
-import { miliToMin, minToMili } from '../../common/helpers/conversion';
 import formatTime from '../../common/helpers/format-time';
+import { Link } from 'react-router';
 
 class Counter extends Component {
   static propTypes = {
-    setDuration: PropTypes.func.isRequired,
     timerStart: PropTypes.func.isRequired,
     timerStop: PropTypes.func.isRequired,
     counter: PropTypes.object.isRequired
   };
-
-
-  setDuration(event) {
-    return this.props.setDuration(minToMili(parseFloat(event.target.value) || 0));
-  }
 
   render() {
     const { counter, timerStart, timerStop } = this.props;
@@ -27,10 +21,8 @@ class Counter extends Component {
         </div>
         <button onClick={() => timerStart()}>Start</button>
         <button onClick={() => timerStop()}>Stop</button>
-        <input
-          type="text"
-          onChange={this.setDuration.bind(this)}
-          value={miliToMin(counter.duration)} />
+
+        <Link to="/settings">Settings</Link>
       </div>
     );
   }
