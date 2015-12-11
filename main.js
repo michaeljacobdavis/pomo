@@ -86,7 +86,6 @@ function registerEvents(events) {
     interval = setInterval(() => {
       const timestamp = new Date().getTime();
       event.sender.send(counterActions.TIMER_TICK, timestamp);
-
       updateTitle(timestamp);
     }, 1000);
   });
@@ -101,4 +100,16 @@ function registerEvents(events) {
   events.on(settingsActions.SET_SHORT_BREAK_DURATION, settingsHandler);
   events.on(settingsActions.SET_LONG_BREAK_DURATION, settingsHandler);
   events.on(settingsActions.SET_SET_COUNT, settingsHandler);
+}
+
+function constructSchedule(options) {
+  var schedule = [];
+
+  Array(options.setCount - (options.completedSets || 0)).forEach(() => {
+    schedule.push(options.workDuration);
+    schedule.push(options.shortBreakDuration);
+  });
+  schedule.push(options.longBreakDuration);
+
+  return schedule;
 }
