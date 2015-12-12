@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Counter.module.css';
-import formatTime from '../../common/helpers/format-time';
+import formatTime from '../../common/format-time';
 import { Link } from 'react-router';
 
 class Counter extends Component {
@@ -8,12 +8,12 @@ class Counter extends Component {
     timerStart: PropTypes.func.isRequired,
     timerStop: PropTypes.func.isRequired,
     counter: PropTypes.object.isRequired,
-    settings: PropTypes.object.isRequired
+    schedule: PropTypes.object.isRequired
   };
 
   render() {
-    const { settings, counter, timerStart, timerStop } = this.props;
-    const time = formatTime(settings.workDuration - (counter.current - counter.start));
+    const { schedule, counter, timerStart, timerStop } = this.props;
+    const time = formatTime(schedule.list[schedule.current].duration - (counter.current - counter.start));
 
     return (
       <div>

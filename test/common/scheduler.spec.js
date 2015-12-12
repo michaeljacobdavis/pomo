@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions: 0 */
 import { expect } from 'chai';
-import scheduler from '../../main/scheduler';
+import scheduler from '../../common/scheduler';
 
 const options = {
   setCount: 4,
@@ -22,15 +22,5 @@ describe('scheduler', () => {
     expect(result[5].duration).to.equal(5);
     expect(result[6].duration).to.equal(30);
     expect(result[7].duration).to.equal(15);
-  });
-
-  it('returns an shorter schedule if sets have already been completed', () => {
-    const result = scheduler({
-      ...options,
-      completedSets: 3
-    });
-
-    expect(result[0].duration).to.equal(30);
-    expect(result[1].duration).to.equal(15);
   });
 });

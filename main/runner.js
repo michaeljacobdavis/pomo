@@ -2,7 +2,7 @@
 
 const bus = require('./event-bus');
 const counterActions = require('../common/action-types/counter');
-const settingsActions = require('../common/action-types/settings');
+const scheduleActions = require('../common/action-types/schedule');
 const appActions = require('../common/action-types/app');
 
 module.exports = function schedule(ipc, tick) {
@@ -30,10 +30,7 @@ module.exports = function schedule(ipc, tick) {
   }
 
   ipc.on(counterActions.TIMER_START, handleEvent);
-  ipc.on(settingsActions.SET_WORK_DURATION, handleEvent);
-  ipc.on(settingsActions.SET_SHORT_BREAK_DURATION, handleEvent);
-  ipc.on(settingsActions.SET_LONG_BREAK_DURATION, handleEvent);
-  ipc.on(settingsActions.SET_SET_COUNT, handleEvent);
+  ipc.on(scheduleActions.SCHEDULE, handleEvent);
 
   ipc.on(counterActions.TIMER_STOP, handleStop);
 };

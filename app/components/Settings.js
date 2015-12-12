@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { miliToMin, minToMili } from '../../common/helpers/conversion';
+import { miliToMin, minToMili } from '../../common/conversion';
 import { Link } from 'react-router';
 
 class Settings extends Component {

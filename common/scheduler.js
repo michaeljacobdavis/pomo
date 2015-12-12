@@ -1,7 +1,7 @@
 'use strict';
 
 const times = require('lodash.times');
-const durationActions = require('../action-types/duration-types');
+const durationActions = require('./action-types/duration-types');
 
 module.exports = function scheduler(options) {
   var schedule = [];
