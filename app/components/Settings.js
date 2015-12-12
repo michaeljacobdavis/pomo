@@ -16,34 +16,38 @@ class Settings extends Component {
     return cb(minToMili(parseFloat(event.target.value) || 0));
   }
 
+  setSetCount(event) {
+    return this.props.setSetCount(parseFloat(event.target.value) || 0);
+  }
+
   render() {
-    const { settings, setWorkDuration, setShortBreakDuration, setLongBreakDuration, setSetCount } = this.props;
+    const { settings, setWorkDuration, setShortBreakDuration, setLongBreakDuration } = this.props;
 
     return (
       <div>
         <label>Work:
           <input
             type="text"
-            onChange={this.setTime.bind(setWorkDuration)}
-            value={miliToMin(settings.workDuration)} />
+            onChange={this.setTime.bind(this, setWorkDuration)}
+            defaultValue={miliToMin(settings.workDuration)} />
         </label>
         <label>Short Break:
           <input
             type="text"
-            onChange={this.setTime.bind(setShortBreakDuration)}
-            value={miliToMin(settings.shortBreakDuration)} />
+            onChange={this.setTime.bind(this, setShortBreakDuration)}
+            defaultValue={miliToMin(settings.shortBreakDuration)} />
         </label>
         <label>Long Break:
           <input
             type="text"
-            onChange={this.setTime.bind(setLongBreakDuration)}
-            value={miliToMin(settings.longBreakDuration)} />
+            onChange={this.setTime.bind(this, setLongBreakDuration)}
+            defaultValue={miliToMin(settings.longBreakDuration)} />
         </label>
         <label>Set Count:
           <input
             type="text"
-            onChange={setSetCount}
-            value={miliToMin(settings.setCount)} />
+            onChange={this.setSetCount.bind(this)}
+            defaultValue={settings.setCount} />
         </label>
           <Link to="/">Done</Link>
       </div>
