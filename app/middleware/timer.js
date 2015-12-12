@@ -4,8 +4,8 @@ import { ipcRenderer } from 'electron';
 
 const timer = (store) => {
   // Handle tick events from main thread
-  ipcRenderer.on(TIMER_TICK, (event, timestamp) => {
-    store.dispatch(tick(timestamp));
+  ipcRenderer.on(TIMER_TICK, (event, payload) => {
+    store.dispatch(tick(payload));
   });
 
   return (next) => (action) => {

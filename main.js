@@ -3,15 +3,16 @@
 const electron = require('electron');
 const events = require('events');
 const WindowHandler = require('./main/window-handler');
+const tick = require('./main/tick');
+const scheduler = require('./main/scheduler');
+const runner = require('./main/runner');
 const path = require('path');
-const formatTime = require('./common/helpers/format-time');
-const counterActions = require('./common/action-types/counter');
-const settingsActions = require('./common/action-types/settings');
 const app = electron.app;
 const Tray = electron.Tray;
 const crashReporter = electron.crashReporter;
-const ipc = electron.ipcMain;
 const internals = new events.EventEmitter();
+const ipc = electron.ipcMain;
+const bus = require('./event-bus');
 
 internals.settings = {};
 
@@ -41,7 +42,8 @@ app.on('ready', () => {
     internals.windowHandler = null;
   });
 
-  registerEvents(ipc);
+  bus.on('app.title', internals.tray.setTitle);
+  runner(ipc, tick, scheduler);
 
   function click(e, bounds) {
     if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
@@ -66,50 +68,3 @@ app.on('ready', () => {
     app.dock.hide();
   }
 });
-
-
-function registerEvents(events) {
-  let cachedState;
-  let interval;
-
-  function settingsHandler(event, state) {
-    cachedState = state;
-  }
-
-  function updateTitle(timestamp) {
-    internals.tray.setTitle(formatTime(cachedState.settings.workDuration - (timestamp - cachedState.counter.start)));
-  }
-
-  events.on(counterActions.TIMER_START, (event, state) => {
-    settingsHandler(event, state);
-
-    interval = setInterval(() => {
-      const timestamp = new Date().getTime();
-      event.sender.send(counterActions.TIMER_TICK, timestamp);
-      updateTitle(timestamp);
-    }, 1000);
-  });
-
-  events.on(counterActions.TIMER_STOP, (event, state) => {
-    settingsHandler(event, state);
-    internals.tray.setTitle('');
-    clearInterval(interval);
-  });
-
-  events.on(settingsActions.SET_WORK_DURATION, settingsHandler);
-  events.on(settingsActions.SET_SHORT_BREAK_DURATION, settingsHandler);
-  events.on(settingsActions.SET_LONG_BREAK_DURATION, settingsHandler);
-  events.on(settingsActions.SET_SET_COUNT, settingsHandler);
-}
-
-function constructSchedule(options) {
-  var schedule = [];
-
-  Array(options.setCount - (options.completedSets || 0)).forEach(() => {
-    schedule.push(options.workDuration);
-    schedule.push(options.shortBreakDuration);
-  });
-  schedule.push(options.longBreakDuration);
-
-  return schedule;
-}

@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions: 0 */
 import { expect } from 'chai';
-import constructSchedule from '../../main/construct-schedule';
+import scheduler from '../../main/scheduler';
 
 const options = {
   setCount: 4,
@@ -10,9 +10,9 @@ const options = {
   longBreakDuration: 15
 };
 
-describe('constructSchedule', () => {
+describe('scheduler', () => {
   it('returns an array based on options', () => {
-    const result = constructSchedule(options);
+    const result = scheduler(options);
 
     expect(result[0].duration).to.equal(30);
     expect(result[1].duration).to.equal(5);
@@ -25,7 +25,7 @@ describe('constructSchedule', () => {
   });
 
   it('returns an shorter schedule if sets have already been completed', () => {
-    const result = constructSchedule({
+    const result = scheduler({
       ...options,
       completedSets: 3
     });

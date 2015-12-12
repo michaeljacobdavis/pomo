@@ -1,6 +1,6 @@
 const times = require('lodash.times');
 
-module.exports = function constructSchedule(options) {
+module.exports = function scheduler(options) {
   var schedule = [];
   var totalSets = options.setCount - (options.completedSets || 0);
 

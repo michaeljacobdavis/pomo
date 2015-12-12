@@ -4,7 +4,7 @@ const initialState = {
   workDuration: 25 * 60 * 1000,
   shortBreakDuration: 3 * 60 * 1000,
   longBreakDuration: 15 * 60 * 1000,
-  setCount: 15 * 60 * 1000,
+  setCount: 4
 };
 
 export default function counter(state = initialState, action) {
