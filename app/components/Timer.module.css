@@ -6,12 +6,21 @@
   text-align: center;
 }
 
-.paused {
+.container {
   height: 100vh;
+}
+
+.paused {
   background: linear-gradient(to top, #4CB8C4, #3CD3AD);
 }
 
 .running {
-  height: 100vh;
   background: linear-gradient(to top, #fd746c ,#ff9068);
+}
+
+.titleBarItem {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.3rem;
+  cursor: default;
 }

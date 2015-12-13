@@ -4,11 +4,3 @@
   line-height: 2.5em;
   padding: 0 0.5em;
 }
-
-.item {
-  background: linear-gradient(to top, #4CB8C4, #3CD3AD);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 1.3rem;
-  cursor: default;
-}
