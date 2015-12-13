@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Counter.module.css';
 import formatTime from '../../common/format-time';
-import { Link } from 'react-router';
 
 class Counter extends Component {
   static propTypes = {
@@ -16,14 +15,13 @@ class Counter extends Component {
     const time = formatTime(schedule.list[schedule.current].duration - (counter.current - counter.start));
 
     return (
-      <div>
+      <div className={counter.running ? styles.running : styles.paused}>
         <div className={styles.counter}>
           {time}
         </div>
         <button onClick={() => timerStart()}>Start</button>
         <button onClick={() => timerStop()}>Stop</button>
 
-        <Link to="/settings">Settings</Link>
       </div>
     );
   }

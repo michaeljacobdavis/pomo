@@ -1,5 +1,17 @@
 .counter {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
   letter-spacing: -.025em;
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+
+.paused {
+  height: 100vh;
+  background: linear-gradient(to top, #4CB8C4, #3CD3AD);
+}
+
+.running {
+  height: 100vh;
+  background: linear-gradient(to top, #fd746c ,#ff9068);
 }
