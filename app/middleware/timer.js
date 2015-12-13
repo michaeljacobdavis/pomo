@@ -1,6 +1,6 @@
-import { tick } from '../actions/counter';
+import { tick } from '../actions/timer';
 import { nextSchedule } from '../actions/schedule';
-import { TIMER_TICK } from '../../common/action-types/counter';
+import { TIMER_TICK } from '../../common/action-types/timer';
 import { NEXT_SCHEDULE } from '../../common/action-types/schedule';
 import { ipcRenderer } from 'electron';
 

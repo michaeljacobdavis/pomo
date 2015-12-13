@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import runner from '../../main/runner';
-import { TIMER_START, TIMER_STOP } from '../../common/action-types/counter';
+import { TIMER_START, TIMER_STOP } from '../../common/action-types/timer';
 import { EventEmitter } from 'events';
 
 let internals;
@@ -15,7 +15,7 @@ describe('runner', () => {
     internals.ipc = new EventEmitter();
     internals.tick = () => {};
     internals.state = {
-      counter: {
+      timer: {
         running: true
       },
       settings: {}

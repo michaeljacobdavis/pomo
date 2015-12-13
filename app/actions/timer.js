@@ -1,4 +1,4 @@
-import { TIMER_TICK, TIMER_START, TIMER_STOP } from '../../common/action-types/counter';
+import { TIMER_TICK, TIMER_START, TIMER_STOP } from '../../common/action-types/timer';
 
 export function tick(payload) {
   return { type: TIMER_TICK, payload };

@@ -1,22 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './Counter.module.css';
+import styles from './Timer.module.css';
 import formatTime from '../../common/format-time';
+import TitleBar from '../components/TitleBar';
 
-class Counter extends Component {
+class Timer extends Component {
   static propTypes = {
     timerStart: PropTypes.func.isRequired,
     timerStop: PropTypes.func.isRequired,
-    counter: PropTypes.object.isRequired,
+    timer: PropTypes.object.isRequired,
     schedule: PropTypes.object.isRequired
   };
 
   render() {
-    const { schedule, counter, timerStart, timerStop } = this.props;
-    const time = formatTime(schedule.list[schedule.current].duration - (counter.current - counter.start));
+    const { schedule, timer, timerStart, timerStop } = this.props;
+    const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
 
     return (
-      <div className={counter.running ? styles.running : styles.paused}>
-        <div className={styles.counter}>
+      <div className={timer.running ? styles.running : styles.paused}>
+        <div className={styles.timer}>
           {time}
         </div>
         <button onClick={() => timerStart()}>Start</button>
@@ -27,4 +28,4 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+export default Timer;

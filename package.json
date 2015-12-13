@@ -80,7 +80,7 @@
     "electron-debug": "^0.5.1",
     "electron-positioner": "^2.0.2",
     "font-awesome": "^4.4.0",
-    "history": "^1.13.0",
+    "history": "^1.13.1",
     "lodash.times": "^3.0.3",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",

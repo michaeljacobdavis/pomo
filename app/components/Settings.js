@@ -27,25 +27,25 @@ class Settings extends Component {
       <div>
         <label>Work:
           <input
-            type="text"
+            type="number"
             onChange={this.setTime.bind(this, setWorkDuration)}
             defaultValue={miliToMin(settings.workDuration)} />
         </label>
         <label>Short Break:
           <input
-            type="text"
+            type="number"
             onChange={this.setTime.bind(this, setShortBreakDuration)}
             defaultValue={miliToMin(settings.shortBreakDuration)} />
         </label>
         <label>Long Break:
           <input
-            type="text"
+            type="number"
             onChange={this.setTime.bind(this, setLongBreakDuration)}
             defaultValue={miliToMin(settings.longBreakDuration)} />
         </label>
         <label>Set Count:
           <input
-            type="text"
+            type="number"
             onChange={this.setSetCount.bind(this)}
             defaultValue={settings.setCount} />
         </label>

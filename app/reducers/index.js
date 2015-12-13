@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+import timer from './timer';
 import schedule from './schedule';
 import settings from './settings';
 
 const rootReducer = combineReducers({
-  counter,
+  timer,
   schedule,
   settings
 });

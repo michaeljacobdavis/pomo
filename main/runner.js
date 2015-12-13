@@ -1,7 +1,7 @@
 'use strict';
 
 const bus = require('./event-bus');
-const counterActions = require('../common/action-types/counter');
+const timerActions = require('../common/action-types/timer');
 const scheduleActions = require('../common/action-types/schedule');
 const appActions = require('../common/action-types/app');
 
@@ -9,8 +9,8 @@ module.exports = function schedule(ipc, tick) {
   let interval;
 
   function handleEvent(event, state) {
-    if (state.counter.running) {
-      state.counter.start = new Date().getTime();
+    if (state.timer.running) {
+      state.timer.start = new Date().getTime();
       const ticker = tick.bind(null, event, state);
 
       // Init
@@ -29,8 +29,8 @@ module.exports = function schedule(ipc, tick) {
     clearInterval(interval);
   }
 
-  ipc.on(counterActions.TIMER_START, handleEvent);
+  ipc.on(timerActions.TIMER_START, handleEvent);
   ipc.on(scheduleActions.SCHEDULE, handleEvent);
 
-  ipc.on(counterActions.TIMER_STOP, handleStop);
+  ipc.on(timerActions.TIMER_STOP, handleStop);
 };
