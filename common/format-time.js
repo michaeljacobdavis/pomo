@@ -1,4 +1,3 @@
-
 module.exports = function formatTime(duration) {
   'use strict';
 

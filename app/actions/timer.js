@@ -1,6 +1,4 @@
-export const TIMER_TICK = 'TIMER_TICK';
-export const TIMER_START = 'TIMER_START';
-export const TIMER_STOP = 'TIMER_STOP';
+import { TIMER_TICK, TIMER_START, TIMER_STOP } from '../../common/action-types/timer';
 
 export function tick(payload) {
   return { type: TIMER_TICK, payload };

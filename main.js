@@ -1,72 +1,69 @@
 'use strict';
 
 const electron = require('electron');
-const Positioner = require('electron-positioner');
-const events = require('events');
 const path = require('path');
-const formatTime = require('./common/helpers/format-time');
+const WindowHandler = require('./main/window-handler');
+const tick = require('./main/tick');
+const runner = require('./main/runner');
+const appActions = require('./common/action-types/app');
+const bus = require('./main/event-bus');
+const notifier = require('node-notifier');
 const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const crashReporter = electron.crashReporter;
 const ipc = electron.ipcMain;
-const internals = new events.EventEmitter();
-
 
 require('electron-debug')();
 crashReporter.start();
-
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-
 app.on('ready', () => {
-  internals.tray = new Tray(path.join(app.getAppPath(), 'IconTemplate.png'));
+  const tray = new Tray(path.join(app.getAppPath(), 'IconTemplate.png'));
   let cachedBounds;
-  internals.window = createWindow();
+  let appUrl;
+
+  // Load app
+  if (process.env.HOT) {
+    appUrl = `file://${__dirname}/app/hot-dev-app.html`;
+  } else {
+    appUrl = `file://${__dirname}/app/app.html`;
+  }
+
+  let windowHandler = new WindowHandler(appUrl);
 
   // Handle close
-  internals.window.on('closed', () => {
-    internals.window = null;
+  windowHandler.window.on('closed', () => {
+    windowHandler = null;
   });
 
-  // TODO: Move this out and clean up
-  ipc.on('timer.start', (event, state) => {
-    internals.duration = state.settings.duration;
-    internals.interval = setInterval(() => {
-      const timestamp = new Date().getTime();
-      event.sender.send('timer.tick', timestamp);
-      internals.tray.setTitle(formatTime(internals.duration - (timestamp - state.counter.start)));
-    }, 1000);
+  bus.on(appActions.APP_TITLE, (title) => {
+    tray.setTitle(title);
   });
 
-  ipc.on('timer.stop', () => {
-    clearInterval(internals.interval);
+  bus.on(appActions.APP_NOTIFY, (notification) => {
+    notifier.notify(notification);
   });
 
-  ipc.on('timer.duration', (event, state) => {
-    internals.duration = state.settings.duration;
-  });
-
-  internals.positioner = new Positioner(internals.window);
+  runner(ipc, tick);
 
   function click(e, bounds) {
     if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
-      return hideWindow();
+      return windowHandler.hide();
     }
 
-    if (internals.window && internals.window.isVisible()) {
-      return hideWindow();
+    if (windowHandler.window.isVisible()) {
+      return windowHandler.hide();
     }
 
     cachedBounds = bounds || cachedBounds;
-    showWindow(cachedBounds);
+    windowHandler.show(cachedBounds);
   }
 
   // Register tray events
-  internals.tray
+  tray
   .on('click', click)
   .on('double-click', click);
 
@@ -75,53 +72,3 @@ app.on('ready', () => {
     app.dock.hide();
   }
 });
-
-
-function createWindow() {
-  const window = new BrowserWindow({
-    // resizeable: false,
-    show: false,
-    frame: false,
-    width: 200,
-    height: 200
-  });
-
-  if (process.env.NODE_ENV === 'production') {
-    // Handle loss of focus
-    window.on('blur', hideWindow);
-  }
-
-  // Load app
-  if (process.env.HOT) {
-    window.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
-  } else {
-    window.loadURL(`file://${__dirname}/app/app.html`);
-  }
-
-  if (process.env.NODE_ENV === 'development') {
-    window.openDevTools();
-  }
-
-  return window;
-}
-
-function showWindow(trayPos) {
-  const windowPosition = (process.platform === 'win32') ? 'trayBottomCenter' : 'trayCenter';
-  let noBoundsPosition = null;
-
-  // Default the window to the right if `trayPos` bounds are undefined or null.
-  if ((typeof trayPos === 'undefined' || trayPos.x === 0) && windowPosition.substr(0, 4) === 'tray') {
-    noBoundsPosition = (process.platform === 'win32') ? 'bottomRight' : 'topRight';
-  }
-
-  const position = internals.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
-
-  internals.window.setPosition(position.x, position.y);
-  internals.window.show();
-  return;
-}
-
-function hideWindow() {
-  if (!internals.window) return;
-  internals.window.hide();
-}

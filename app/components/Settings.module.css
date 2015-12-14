@@ -1,0 +1,17 @@
+.title-bar-container {
+  composes: title-bar-container from './TitleBar.module.css';
+}
+
+.title-bar-back {
+  composes: fa-angle-left from global;
+}
+
+.title-bar-back-running {
+  composes: title-bar-back;
+  composes: title-bar-item-running from './TitleBar.module.css';
+}
+
+.title-bar-back-paused {
+  composes: title-bar-back;
+  composes: title-bar-item-paused from './TitleBar.module.css';
+}

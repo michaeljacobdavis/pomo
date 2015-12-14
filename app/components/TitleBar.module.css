@@ -1,0 +1,29 @@
+.container {
+  background: white;
+  height: 2.5rem;
+  padding: 0 0.5em;
+}
+
+/* Reusable for child components */
+.title-bar-container {
+  display: flex;
+}
+
+.title-bar-item {
+  composes: fa from global;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+  cursor: default;
+}
+
+.title-bar-item-paused {
+  composes: title-bar-item;
+  composes: paused from './Status.module.css';
+}
+
+.title-bar-item-running {
+  composes: title-bar-item;
+  composes: running from './Status.module.css';
+}

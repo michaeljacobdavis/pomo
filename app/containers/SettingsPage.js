@@ -5,6 +5,7 @@ import * as SettingsActions from '../actions/settings';
 
 function mapStateToProps(state) {
   return {
+    timer: state.timer,
     settings: state.settings
   };
 }

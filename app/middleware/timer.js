@@ -1,29 +1,23 @@
-import { TIMER_START, TIMER_STOP, tick } from '../actions/counter';
-import { SET_DURATION } from '../actions/settings';
+import { tick } from '../actions/timer';
+import { nextSchedule } from '../actions/schedule';
+import { TIMER_TICK } from '../../common/action-types/timer';
+import { NEXT_SCHEDULE } from '../../common/action-types/schedule';
 import { ipcRenderer } from 'electron';
 
 const timer = (store) => {
   // Handle tick events from main thread
-  ipcRenderer.on('timer.tick', (event, timestamp) => {
-    store.dispatch(tick(timestamp));
+  ipcRenderer.on(TIMER_TICK, (event, payload) => {
+    store.dispatch(tick(payload));
+  });
+  ipcRenderer.on(NEXT_SCHEDULE, (event, payload) => {
+    store.dispatch(nextSchedule(payload));
   });
 
   return (next) => (action) => {
     const result = next(action);
 
-    switch (action.type) {
-    case TIMER_START:
-      ipcRenderer.send('timer.start', store.getState());
-      return result;
-    case TIMER_STOP:
-      ipcRenderer.send('timer.stop');
-      return result;
-    case SET_DURATION:
-      ipcRenderer.send('timer.duration', store.getState());
-      return result;
-    default:
-      return result;
-    }
+    ipcRenderer.send(action.type, store.getState());
+    return result;
   };
 };
 
