@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Timer.module.css';
 import formatTime from '../../common/format-time';
-import TitleBar from '../components/TitleBar';
+import TitleBar from './TitleBar';
+import Schedule from './Schedule';
 import { Link } from 'react-router';
 
 class Timer extends Component {
@@ -12,8 +13,8 @@ class Timer extends Component {
     schedule: PropTypes.object.isRequired
   };
 
-  colorStatus(status) {
-    return status ? styles.running : styles.paused;
+  colorStatus(status, running, paused) {
+    return status ? running : paused;
   }
 
   render() {
@@ -21,9 +22,11 @@ class Timer extends Component {
     const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
 
     return (
-      <div className={[this.colorStatus(timer.running), styles.container].join(' ')}>
+      <div className={this.colorStatus(timer.running, styles['container-running'], styles['container-paused'])}>
         <TitleBar>
-          <Link to="/settings"><i className={[this.colorStatus(timer.running), styles.titleBarItem, 'fa', 'fa-cog'].join(' ')}></i></Link>
+          <Link to="/settings">
+            <i className={[this.colorStatus(timer.running, styles['title-bar-item-running'], styles['title-bar-item-paused']), 'fa', 'fa-cog'].join(' ')}></i>
+          </Link>
         </TitleBar>
         <div className={styles.timer}>
           {time}
@@ -31,6 +34,7 @@ class Timer extends Component {
         <button onClick={() => timerStart()}>Start</button>
         <button onClick={() => timerStop()}>Stop</button>
 
+        <Schedule schedule={schedule} />
       </div>
     );
   }

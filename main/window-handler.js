@@ -9,8 +9,8 @@ function WindowHandler(url) {
     // resizeable: false,
     show: false,
     frame: false,
-    width: 200,
-    height: 200
+    width: 150,
+    height: 300
   });
 
   const positioner = new Positioner(window);

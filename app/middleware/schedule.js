@@ -7,11 +7,8 @@ const schedule = (store) => (next) => (action) => {
 
   switch (action.type) {
   case SET_WORK_DURATION:
-    return store.dispatch(setSchedule(scheduler(store.getState().settings)));
   case SET_SHORT_BREAK_DURATION:
-    return store.dispatch(setSchedule(scheduler(store.getState().settings)));
   case SET_LONG_BREAK_DURATION:
-    return store.dispatch(setSchedule(scheduler(store.getState().settings)));
   case SET_SET_COUNT:
     return store.dispatch(setSchedule(scheduler(store.getState().settings)));
   default:

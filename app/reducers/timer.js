@@ -9,15 +9,21 @@ const initialState = {
 export default function timer(state = initialState, action) {
   switch (action.type) {
   case TIMER_TICK:
-    return Object.assign({}, state, action.payload);
+    return {
+      ...state,
+      ...action.payload
+    };
   case TIMER_START:
-    return Object.assign({}, state, {
+    return {
+      ...state,
+      start: new Date().getTime(),
       running: true
-    });
+    };
   case TIMER_STOP:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       running: false
-    });
+    };
   default:
     return state;
   }

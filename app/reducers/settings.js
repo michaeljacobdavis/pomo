@@ -10,21 +10,25 @@ export const initialState = {
 export default function counter(state = initialState, action) {
   switch (action.type) {
   case SET_WORK_DURATION:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       workDuration: action.payload
-    });
+    };
   case SET_SHORT_BREAK_DURATION:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       shortBreakDuration: action.payload
-    });
+    };
   case SET_LONG_BREAK_DURATION:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       longBreakDuration: action.payload
-    });
+    };
   case SET_SET_COUNT:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       setCount: action.payload
-    });
+    };
   default:
     return state;
   }

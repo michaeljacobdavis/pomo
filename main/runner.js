@@ -10,7 +10,6 @@ module.exports = function schedule(ipc, tick) {
 
   function handleEvent(event, state) {
     if (state.timer.running) {
-      state.timer.start = new Date().getTime();
       const ticker = tick.bind(null, event, state);
 
       // Init

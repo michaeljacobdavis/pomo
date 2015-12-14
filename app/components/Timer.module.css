@@ -1,11 +1,3 @@
-.timer {
-  font-size: 2.5rem;
-  letter-spacing: -.025em;
-  color: white;
-  font-weight: 100;
-  text-align: center;
-}
-
 .container {
   height: 100vh;
 }
@@ -18,9 +10,41 @@
   background: linear-gradient(to top, #fd746c ,#ff9068);
 }
 
-.titleBarItem {
+.timer {
+  font-size: 2.5rem;
+  letter-spacing: -.025em;
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+
+.schedule {
+  text-align: center;
+}
+
+.container-paused {
+  composes: container;
+  composes: paused;
+}
+
+.container-running {
+  composes: container;
+  composes: running;
+}
+
+.title-bar-item {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.3rem;
   cursor: default;
+}
+
+.title-bar-item-paused {
+  composes: title-bar-item;
+  composes: paused;
+}
+
+.title-bar-item-running {
+  composes: title-bar-item;
+  composes: running;
 }

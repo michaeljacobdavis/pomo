@@ -10,13 +10,15 @@ const initialState = {
 export default function counter(state = initialState, action) {
   switch (action.type) {
   case SCHEDULE:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       list: action.payload
-    });
+    };
   case NEXT_SCHEDULE:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       current: action.payload
-    });
+    };
   default:
     return state;
   }
