@@ -5,18 +5,19 @@ const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 
 function WindowHandler(url) {
-  const window = new BrowserWindow({
-    // resizeable: false,
+  const defaults = {
+    resizeable: process.env.NODE_ENV === 'development' ? true : false,
     show: false,
     frame: false,
     width: 150,
     height: 300
-  });
+  };
+  const window = new BrowserWindow(defaults);
 
   const positioner = new Positioner(window);
 
   // Handle loss of focus
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV !== 'development') {
     window.on('blur', this.hide.bind(this));
   }
 
