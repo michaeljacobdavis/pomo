@@ -24,15 +24,17 @@ class Timer extends Component {
     return (
       <div className={this.colorStatus(timer.running, styles['container-running'], styles['container-paused'])}>
         <TitleBar>
-          <Link to="/settings">
-            <i className={[this.colorStatus(timer.running, styles['title-bar-item-running'], styles['title-bar-item-paused']), 'fa', 'fa-cog'].join(' ')}></i>
-          </Link>
+          <div className={styles['title-bar-container']}>
+            {timer.running ?
+              <i onClick={() => timerStop()} className={styles['title-bar-pause']}></i> :
+              <i onClick={() => timerStart()} className={styles['title-bar-play']}></i>
+            }
+            <Link className={this.colorStatus(timer.running, styles['title-bar-settings-running'], styles['title-bar-settings-paused'])} to="/settings" />
+          </div>
         </TitleBar>
         <div className={styles.timer}>
           {time}
         </div>
-        <button onClick={() => timerStart()}>Start</button>
-        <button onClick={() => timerStop()}>Stop</button>
 
         <Schedule schedule={schedule} />
       </div>

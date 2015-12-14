@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Schedule.module.css';
 import formatTime from '../../common/format-time';
+import workTypeDisplay from '../../common/work-type-display';
 
 class Schedule extends Component {
   static propTypes = {
@@ -10,7 +11,7 @@ class Schedule extends Component {
   renderSchedule(schedule, current) {
     return schedule.map((event, index) => {
       return (<div className={ (current === index) ? styles.current : styles.event } key={index}>
-        <strong>{formatTime(event.duration)}</strong> {event.type}
+        {formatTime(event.duration)} {workTypeDisplay(event.type)}
       </div>);
     });
   }

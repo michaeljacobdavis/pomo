@@ -2,14 +2,6 @@
   height: 100vh;
 }
 
-.paused {
-  background: linear-gradient(to top, #4CB8C4, #3CD3AD);
-}
-
-.running {
-  background: linear-gradient(to top, #fd746c ,#ff9068);
-}
-
 .timer {
   font-size: 2.5rem;
   letter-spacing: -.025em;
@@ -24,27 +16,39 @@
 
 .container-paused {
   composes: container;
-  composes: paused;
+  composes: paused from './Status.module.css';
 }
 
 .container-running {
   composes: container;
-  composes: running;
+  composes: running from './Status.module.css';
 }
 
-.title-bar-item {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 1.3rem;
-  cursor: default;
+.title-bar-container {
+  composes: title-bar-container from './TitleBar.module.css';
 }
 
-.title-bar-item-paused {
-  composes: title-bar-item;
-  composes: paused;
+.title-bar-play {
+  composes: fa-play from global;
+  composes: title-bar-item-paused from './TitleBar.module.css';
+  align-self: flex-start;
+}
+.title-bar-pause {
+  composes: fa-pause from global;
+  composes: title-bar-item-running from './TitleBar.module.css';
 }
 
-.title-bar-item-running {
-  composes: title-bar-item;
-  composes: running;
+.title-bar-settings {
+  composes: fa-cog from global;
+  margin-left: auto;
+}
+
+.title-bar-settings-running {
+  composes: title-bar-settings;
+  composes: title-bar-item-running from './TitleBar.module.css';
+}
+
+.title-bar-settings-paused {
+  composes: title-bar-settings;
+  composes: title-bar-item-paused from './TitleBar.module.css';
 }
