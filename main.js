@@ -7,6 +7,7 @@ const tick = require('./main/tick');
 const runner = require('./main/runner');
 const appActions = require('./common/action-types/app');
 const bus = require('./main/event-bus');
+const notifier = require('node-notifier');
 const app = electron.app;
 const Tray = electron.Tray;
 const crashReporter = electron.crashReporter;
@@ -40,6 +41,10 @@ app.on('ready', () => {
 
   bus.on(appActions.APP_TITLE, (title) => {
     tray.setTitle(title);
+  });
+
+  bus.on(appActions.APP_NOTIFY, (notification) => {
+    notifier.notify(notification);
   });
 
   runner(ipc, tick);
