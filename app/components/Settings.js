@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import TitleBar from './TitleBar';
+import styles from './Settings.module.css';
 import { miliToMin, minToMili } from '../../common/conversion';
 import { Link } from 'react-router';
 
@@ -8,6 +10,7 @@ class Settings extends Component {
     setShortBreakDuration: PropTypes.func.isRequired,
     setLongBreakDuration: PropTypes.func.isRequired,
     setSetCount: PropTypes.func.isRequired,
+    timer: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired
   };
 
@@ -21,10 +24,16 @@ class Settings extends Component {
   }
 
   render() {
-    const { settings, setWorkDuration, setShortBreakDuration, setLongBreakDuration } = this.props;
+    const { settings, timer, setWorkDuration, setShortBreakDuration, setLongBreakDuration } = this.props;
 
     return (
       <div>
+        <TitleBar>
+          <div className={styles['title-bar-container']}>
+            <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
+          </div>
+        </TitleBar>
+
         <label>Work:
           <input
             type="number"
@@ -49,7 +58,6 @@ class Settings extends Component {
             onChange={this.setSetCount.bind(this)}
             defaultValue={settings.setCount} />
         </label>
-          <Link to="/">Done</Link>
       </div>
     );
   }

@@ -13,23 +13,19 @@ class Timer extends Component {
     schedule: PropTypes.object.isRequired
   };
 
-  colorStatus(status, running, paused) {
-    return status ? running : paused;
-  }
-
   render() {
     const { schedule, timer, timerStart, timerStop } = this.props;
     const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
 
     return (
-      <div className={this.colorStatus(timer.running, styles['container-running'], styles['container-paused'])}>
+      <div className={timer.running ? styles['container-running'] : styles['container-paused']}>
         <TitleBar>
           <div className={styles['title-bar-container']}>
             {timer.running ?
               <i onClick={() => timerStop()} className={styles['title-bar-pause']}></i> :
               <i onClick={() => timerStart()} className={styles['title-bar-play']}></i>
             }
-            <Link className={this.colorStatus(timer.running, styles['title-bar-settings-running'], styles['title-bar-settings-paused'])} to="/settings" />
+            <Link className={timer.running ? styles['title-bar-settings-running'] : styles['title-bar-settings-paused']} to="/settings" />
           </div>
         </TitleBar>
         <div className={styles.timer}>
