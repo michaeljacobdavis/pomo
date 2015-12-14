@@ -9,7 +9,7 @@ function WindowHandler(url) {
     resizeable: process.env.NODE_ENV === 'development' ? true : false,
     show: false,
     frame: false,
-    width: 150,
+    width: 200,
     height: 300
   };
   const window = new BrowserWindow(defaults);

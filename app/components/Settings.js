@@ -27,37 +27,51 @@ class Settings extends Component {
     const { settings, timer, setWorkDuration, setShortBreakDuration, setLongBreakDuration } = this.props;
 
     return (
-      <div>
+        <div className={styles.container}>
         <TitleBar>
           <div className={styles['title-bar-container']}>
             <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
           </div>
         </TitleBar>
 
-        <label>Work:
-          <input
-            type="number"
-            onChange={this.setTime.bind(this, setWorkDuration)}
-            defaultValue={miliToMin(settings.workDuration)} />
-        </label>
-        <label>Short Break:
-          <input
-            type="number"
-            onChange={this.setTime.bind(this, setShortBreakDuration)}
-            defaultValue={miliToMin(settings.shortBreakDuration)} />
-        </label>
-        <label>Long Break:
-          <input
-            type="number"
-            onChange={this.setTime.bind(this, setLongBreakDuration)}
-            defaultValue={miliToMin(settings.longBreakDuration)} />
-        </label>
-        <label>Set Count:
-          <input
-            type="number"
-            onChange={this.setSetCount.bind(this)}
-            defaultValue={settings.setCount} />
-        </label>
+        <h3 className={styles.heading}>Settings</h3>
+
+        <div className={styles['input-container']}>
+          <label className={styles.label}>Work:
+            <input
+              className={styles.input}
+              type="number"
+              onChange={this.setTime.bind(this, setWorkDuration)}
+              defaultValue={miliToMin(settings.workDuration)} />
+          </label>
+        </div>
+        <div className={styles['input-container']}>
+          <label className={styles.label}>Short Break:
+            <input
+              className={styles.input}
+              type="number"
+              onChange={this.setTime.bind(this, setShortBreakDuration)}
+              defaultValue={miliToMin(settings.shortBreakDuration)} />
+          </label>
+        </div>
+        <div className={styles['input-container']}>
+          <label className={styles.label}>Long Break:
+            <input
+              className={styles.input}
+              type="number"
+              onChange={this.setTime.bind(this, setLongBreakDuration)}
+              defaultValue={miliToMin(settings.longBreakDuration)} />
+          </label>
+        </div>
+        <div className={styles['input-container']}>
+          <label className={styles.label}>Set Count:
+            <input
+              className={styles.input}
+              type="number"
+              onChange={this.setSetCount.bind(this)}
+              defaultValue={settings.setCount} />
+          </label>
+        </div>
       </div>
     );
   }
