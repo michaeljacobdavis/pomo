@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 function WindowHandler(url) {
   const defaults = {
-    resizeable: process.env.NODE_ENV === 'development' ? true : false,
+    resizable: process.env.NODE_ENV === 'development' ? true : false,
     show: false,
     frame: false,
     width: 200,
