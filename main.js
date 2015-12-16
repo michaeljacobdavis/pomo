@@ -21,6 +21,7 @@ crashReporter.start();
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+console.log(app.getVersion())
 
 app.on('ready', () => {
   const tray = new Tray(path.join(app.getAppPath(), 'IconTemplate.png'));
