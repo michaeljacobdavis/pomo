@@ -97,6 +97,7 @@
   "devEngines": {
     "node": "5.x"
   },
+  "repo": "michaeljacobdavis/pomo",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/michaeljacobdavis/pomo.git"
