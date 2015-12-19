@@ -31,16 +31,19 @@ class Settings extends Component {
         <TitleBar>
           <div className={styles['title-bar-container']}>
             <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
+            <h3 className={styles.heading}>Settings</h3>
+            <span className={styles['title-bar-empty']}></span>
           </div>
         </TitleBar>
 
-        <h3 className={styles.heading}>Settings</h3>
 
         <div className={styles['input-container']}>
           <label className={styles.label}>Work:
             <input
               className={styles.input}
               type="number"
+              step="1"
+              min="1"
               onChange={this.setTime.bind(this, setWorkDuration)}
               defaultValue={miliToMin(settings.workDuration)} />
           </label>
@@ -50,6 +53,8 @@ class Settings extends Component {
             <input
               className={styles.input}
               type="number"
+              step="1"
+              min="1"
               onChange={this.setTime.bind(this, setShortBreakDuration)}
               defaultValue={miliToMin(settings.shortBreakDuration)} />
           </label>
@@ -59,6 +64,8 @@ class Settings extends Component {
             <input
               className={styles.input}
               type="number"
+              step="1"
+              min="1"
               onChange={this.setTime.bind(this, setLongBreakDuration)}
               defaultValue={miliToMin(settings.longBreakDuration)} />
           </label>
@@ -68,6 +75,9 @@ class Settings extends Component {
             <input
               className={styles.input}
               type="number"
+              step="1"
+              min="1"
+              max="6"
               onChange={this.setSetCount.bind(this)}
               defaultValue={settings.setCount} />
           </label>

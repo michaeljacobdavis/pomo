@@ -31,7 +31,6 @@
 .title-bar-play {
   composes: fa-play from global;
   composes: title-bar-item-paused from './TitleBar.module.css';
-  align-self: flex-start;
 }
 .title-bar-pause {
   composes: fa-pause from global;
@@ -41,6 +40,7 @@
 .title-bar-settings {
   composes: fa-cog from global;
   margin-left: auto;
+  text-align: right;
 }
 
 .title-bar-settings-running {

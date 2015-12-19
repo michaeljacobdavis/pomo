@@ -9,13 +9,18 @@
   display: flex;
 }
 
-.title-bar-item {
-  composes: fa from global;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.title-bar-header {
   font-size: 1.3rem;
   line-height: 2.5rem;
+}
+
+.title-bar-item {
+  composes: fa from global;
+  composes: title-bar-header;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   cursor: default;
+  flex: 1;
 }
 
 .title-bar-item-paused {
