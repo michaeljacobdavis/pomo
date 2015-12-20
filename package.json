@@ -19,7 +19,7 @@
   "bin": {
     "electron": "./node_modules/.bin/electron"
   },
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
     "electron",
     "react",
@@ -93,7 +93,9 @@
     "react-router": "^1.0.0",
     "redux": "^3.0.4",
     "redux-promise": "^0.5.0",
-    "redux-thunk": "^1.0.0"
+    "redux-thunk": "^1.0.0",
+    "winston": "^2.1.1",
+    "winston-loggly": "^1.2.0"
   },
   "devEngines": {
     "node": "5.x"
@@ -107,5 +109,9 @@
   "bugs": {
     "url": "https://github.com/michaeljacobdavis/pomo/issues"
   },
-  "homepage": "https://github.com/michaeljacobdavis/pomo#readme"
+  "homepage": "https://github.com/michaeljacobdavis/pomo#readme",
+  "loggly": {
+    "subdomain": "pomo",
+    "inputToken": "76d883bd-7337-434e-b3e9-4657c0cb31c3"
+  }
 }
