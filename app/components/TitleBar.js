@@ -1,18 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './TitleBar.module.css';
 
-class TitleBar extends Component {
-  static propTypes = {
-    children: PropTypes.element
-  };
+const TitleBar = ({children}) => {
+  return (
+    <div className={styles.container}>
+    {children}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className={styles.container}>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+TitleBar.propTypes = {
+  children: PropTypes.element
+};
 
 export default TitleBar;

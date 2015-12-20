@@ -1,18 +1,17 @@
 import React, { Component, PropTypes} from 'react';
 import DevTools from './DevTools';
 
+const App = ({children}) => {
+  return (
+    <div>
+      {children}
+      <DevTools />
+    </div>
+  );
+};
 
-export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.element.isRequired
-  };
+App.propTypes = {
+  children: PropTypes.element.isRequired
+};
 
-  render() {
-    return (
-      <div>
-        {this.props.children}
-        <DevTools />
-      </div>
-    );
-  }
-}
+export default App;
