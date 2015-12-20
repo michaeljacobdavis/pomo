@@ -9,13 +9,14 @@ const runner = require('./main/runner');
 const appActions = require('./common/action-types/app');
 const bus = require('./main/event-bus');
 const notifier = require('node-notifier');
+const pkg = require('./package.json');
 const app = electron.app;
 const Tray = electron.Tray;
 const dialog = electron.dialog;
 const crashReporter = electron.crashReporter;
 const ipc = electron.ipcMain;
 const updater = new GhReleases({
-  repo: 'michaeljacobdavis/pomo',
+  repo: pkg.repo,
   currentVersion: app.getVersion()
 });
 
