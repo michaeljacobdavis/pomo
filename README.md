@@ -1,7 +1,5 @@
 # Pomo
 
-[![NPM versio## Install
-
 Install dependencies.
 
 ```bash
