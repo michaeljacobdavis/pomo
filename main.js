@@ -18,15 +18,12 @@ const ipc = electron.ipcMain;
 require('electron-debug')();
 crashReporter.start();
 
+// Log exceptions
 process.once('uncaughtException', (error) => {
   logger.error('uncaughtException', { message: error.message, stack: error.stack });
 
   // Exit with error
   process.exit(1);
-});
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
 });
 
 app.on('ready', () => {
@@ -48,14 +45,6 @@ app.on('ready', () => {
     windowHandler = null;
   });
 
-  bus.on(appActions.APP_TITLE, (title) => {
-    tray.setTitle(title);
-  });
-
-  bus.on(appActions.APP_NOTIFY, (notification) => {
-    notifier.notify(notification);
-  });
-
   function click(e, bounds) {
     if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
       return windowHandler.hide();
@@ -74,6 +63,14 @@ app.on('ready', () => {
   .on('click', click)
   .on('double-click', click);
 
+  bus.on(appActions.APP_TITLE, (title) => {
+    tray.setTitle(title);
+  });
+
+  bus.on(appActions.APP_NOTIFY, (notification) => {
+    notifier.notify(notification);
+  });
+
   // Hide Dock
   if (app.dock) {
     app.dock.hide();
@@ -81,4 +78,8 @@ app.on('ready', () => {
 
   runner(ipc, tick);
   update(false);
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
 });

@@ -1,4 +1,3 @@
-/* eslint no-unused-expressions: 0 */
 import { expect } from 'chai';
 import scheduler from '../../common/scheduler';
 
@@ -22,5 +21,23 @@ describe('scheduler', () => {
     expect(result[5].duration).to.equal(5);
     expect(result[6].duration).to.equal(30);
     expect(result[7].duration).to.equal(15);
+  });
+
+  it('adds a work and a break per set', () => {
+    const result = scheduler({
+      ...options,
+      setCount: 2
+    });
+
+    expect(result.length).to.equal(4);
+  });
+
+  it('adds a longBreakDuration at the end of all sets', () => {
+    const result = scheduler({
+      ...options,
+      setCount: 1
+    });
+
+    expect(result[1].duration).to.equal(15);
   });
 });
