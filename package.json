@@ -13,7 +13,8 @@
     "build": "NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
     "start": "electron .",
     "start-hot": "HOT=1 NODE_ENV=development electron . --debug",
-    "package": "NODE_ENV=production node package.js",
+    "sign": "./scripts/sign.bash",
+    "package": "NODE_ENV=production node package.js && npm run sign",
     "package-all": "npm run package -- --all"
   },
   "bin": {
