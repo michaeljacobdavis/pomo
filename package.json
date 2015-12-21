@@ -1,6 +1,6 @@
 {
   "name": "Pomo",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Pomodoro Timer in Electron/React",
   "main": "main.js",
   "scripts": {
