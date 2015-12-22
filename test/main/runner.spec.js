@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import runner from '../../main/runner';
-import { TIMER_START, TIMER_STOP } from '../../common/action-types/timer';
+import { TIMER_START, TIMER_PAUSE } from '../../common/action-types/timer';
 import { EventEmitter } from 'events';
 
 let internals;
@@ -44,7 +44,7 @@ describe('runner', () => {
     });
   });
 
-  describe('when TIMER_STOP is recieved', () => {
+  describe('when TIMER_PAUSE is recieved', () => {
     it('clears the interval', () => {
       const spy = internals.sandbox.spy(internals, 'tick');
       runner(internals.ipc, internals.tick, internals.scheduler);
@@ -59,7 +59,7 @@ describe('runner', () => {
       expect(spy.callCount).to.equal(2);
 
       // Call stop
-      internals.ipc.emit(TIMER_STOP, {}, internals.state);
+      internals.ipc.emit(TIMER_PAUSE, {}, internals.state);
       internals.clock.tick(1000);
       expect(spy.callCount).to.equal(2);
     });

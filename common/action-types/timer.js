@@ -1,3 +1,3 @@
 exports.TIMER_TICK = 'TIMER_TICK';
 exports.TIMER_START = 'TIMER_START';
-exports.TIMER_STOP = 'TIMER_STOP';
+exports.TIMER_PAUSE = 'TIMER_PAUSE';
