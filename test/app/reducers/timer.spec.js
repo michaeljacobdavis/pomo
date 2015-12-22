@@ -17,10 +17,20 @@ describe('timer', () => {
   });
 
   describe('TIMER_START', () => {
-    it('sets start to the current time', () => {
+    it('sets start to the current time if start is falsy', () => {
       const time = 120000;
       internals.clock.tick(time);
       const result = timer(timer.initialState, { type: TIMER_START });
+      expect(result.start).to.equal(time);
+    });
+
+    it('sets start to the existing start time if start is already set', () => {
+      const time = 120000;
+      internals.clock.tick();
+      const result = timer({
+        ...timer.initialState,
+        start: time
+      }, { type: TIMER_START });
       expect(result.start).to.equal(time);
     });
 

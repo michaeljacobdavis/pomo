@@ -5,7 +5,7 @@ import TitleBar from './TitleBar';
 import Schedule from './Schedule';
 import { Link } from 'react-router';
 
-const Timer = ({schedule, timer, timerStart, timerStop}) => {
+const Timer = ({schedule, timer, timerStart, timerPause}) => {
   const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
 
   return (
@@ -13,7 +13,7 @@ const Timer = ({schedule, timer, timerStart, timerStop}) => {
       <TitleBar>
         <div className={styles['title-bar-container']}>
           {timer.running ?
-            <i onClick={() => timerStop()} className={styles['title-bar-pause']}></i> :
+            <i onClick={() => timerPause()} className={styles['title-bar-pause']}></i> :
             <i onClick={() => timerStart()} className={styles['title-bar-play']}></i>
           }
           <Link className={timer.running ? styles['title-bar-settings-running'] : styles['title-bar-settings-paused']} to="/settings" />
@@ -30,7 +30,7 @@ const Timer = ({schedule, timer, timerStart, timerStop}) => {
 
 Timer.propTypes = {
   timerStart: PropTypes.func.isRequired,
-  timerStop: PropTypes.func.isRequired,
+  timerPause: PropTypes.func.isRequired,
   timer: PropTypes.object.isRequired,
   schedule: PropTypes.object.isRequired
 };

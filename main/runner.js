@@ -16,14 +16,14 @@ module.exports = function schedule(ipc, tick) {
       ticker();
 
       // Cancel any existing interval
-      handleStop();
+      handlePause();
 
       // Set Interval
       interval = setInterval(ticker, 1000);
     }
   }
 
-  function handleStop() {
+  function handlePause() {
     bus.emit(appActions.APP_TITLE, '');
     clearInterval(interval);
   }
@@ -31,5 +31,5 @@ module.exports = function schedule(ipc, tick) {
   ipc.on(timerActions.TIMER_START, handleEvent);
   ipc.on(scheduleActions.SCHEDULE, handleEvent);
 
-  ipc.on(timerActions.TIMER_STOP, handleStop);
+  ipc.on(timerActions.TIMER_PAUSE, handlePause);
 };

@@ -1,4 +1,4 @@
-import { TIMER_TICK, TIMER_START, TIMER_STOP } from '../../common/action-types/timer';
+import { TIMER_TICK, TIMER_START, TIMER_PAUSE } from '../../common/action-types/timer';
 
 export const initialState = {
   start: null,
@@ -16,10 +16,10 @@ export default function timer(state = initialState, action) {
   case TIMER_START:
     return {
       ...state,
-      start: new Date().getTime(),
+      start: state.start ? state.start : new Date().getTime(),
       running: true
     };
-  case TIMER_STOP:
+  case TIMER_PAUSE:
     return {
       ...state,
       running: false
