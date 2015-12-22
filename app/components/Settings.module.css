@@ -50,7 +50,6 @@
 
 .heading {
   composes: title-bar-header from './TitleBar.module.css';
-  text-align: center;
   font-weight: 100;
   padding: 0;
   margin: 0;

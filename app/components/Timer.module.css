@@ -24,10 +24,6 @@
   composes: running from './Status.module.css';
 }
 
-.title-bar-container {
-  composes: title-bar-container from './TitleBar.module.css';
-}
-
 .title-bar-play {
   composes: fa-play from global;
   composes: title-bar-item-paused from './TitleBar.module.css';
@@ -50,5 +46,21 @@
 
 .title-bar-settings-paused {
   composes: title-bar-settings;
+  composes: title-bar-item-paused from './TitleBar.module.css';
+}
+
+.title-bar-reset {
+  composes: fa-history from global;
+  margin-left: auto;
+  text-align: right;
+}
+
+.title-bar-reset-running {
+  composes: title-bar-reset;
+  composes: title-bar-item-running from './TitleBar.module.css';
+}
+
+.title-bar-reset-paused {
+  composes: title-bar-reset;
   composes: title-bar-item-paused from './TitleBar.module.css';
 }
