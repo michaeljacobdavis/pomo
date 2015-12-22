@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TitleBar from './TitleBar';
 import styles from './Settings.module.css';
+import titleBarStyles from './TitleBar.module.css';
 import { miliToMin, minToMili } from '../../common/conversion';
 import { Link } from 'react-router';
 
@@ -29,10 +30,15 @@ class Settings extends Component {
     return (
         <div className={styles.container}>
         <TitleBar>
-          <div className={styles['title-bar-container']}>
-            <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
-            <h3 className={styles.heading}>Settings</h3>
-            <span className={styles['title-bar-empty']}></span>
+          <div className={titleBarStyles['title-bar-container']}>
+            <div className={titleBarStyles['title-bar-left']}>
+              <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
+            </div>
+            <div className={titleBarStyles['title-bar-center']}>
+              <h3 className={styles.heading}>Settings</h3>
+            </div>
+            <div className={titleBarStyles['title-bar-right']}>
+            </div>
           </div>
         </TitleBar>
 

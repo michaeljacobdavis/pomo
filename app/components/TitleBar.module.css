@@ -20,7 +20,24 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: default;
+  margin: 0 0.5em;
+}
+
+.title-bar-position {
   flex: 1;
+}
+
+.title-bar-left {
+  text-align: left;
+  composes: title-bar-position;
+}
+.title-bar-center {
+  text-align: center;
+  composes: title-bar-position;
+}
+.title-bar-right {
+  text-align: right;
+  composes: title-bar-position;
 }
 
 .title-bar-item-paused {

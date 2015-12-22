@@ -29,6 +29,7 @@ module.exports = function schedule(ipc, tick) {
   }
 
   ipc.on(timerActions.TIMER_START, handleEvent);
+  ipc.on(timerActions.TIMER_RESET, handleEvent);
   ipc.on(scheduleActions.SCHEDULE, handleEvent);
 
   ipc.on(timerActions.TIMER_PAUSE, handlePause);
