@@ -21,7 +21,7 @@ const Timer = ({schedule, timer, timerStart, timerPause, timerReset}) => {
             <i onClick={() => timerReset()} className={timer.running ? styles['title-bar-reset-running'] : styles['title-bar-reset-paused']}></i>
           </div>
           <div className={titleBarStyles['title-bar-right']}>
-            <Link className={timer.running ? styles['title-bar-settings-running'] : styles['title-bar-settings-paused']} to="/settings" />
+            <Link className={timer.running ? styles['title-bar-settings-running'] : styles['title-bar-settings-paused']} to="/settings" query={{ transition: 'slide-left' }} />
           </div>
         </div>
       </TitleBar>

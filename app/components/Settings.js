@@ -32,7 +32,7 @@ class Settings extends Component {
         <TitleBar>
           <div className={titleBarStyles['title-bar-container']}>
             <div className={titleBarStyles['title-bar-left']}>
-              <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" />
+              <Link className={timer.running ? styles['title-bar-back-running'] : styles['title-bar-back-paused']} to="/" query={{ transition: 'slide-right' }} />
             </div>
             <div className={titleBarStyles['title-bar-center']}>
               <h3 className={styles.heading}>Settings</h3>
