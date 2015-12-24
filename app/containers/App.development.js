@@ -1,10 +1,19 @@
 import React, { Component, PropTypes} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import DevTools from './DevTools';
 
-const App = ({children}) => {
+const App = ({children, location}) => {
   return (
     <div>
-      {children}
+      <ReactCSSTransitionGroup
+        component="div"
+        transitionName={location.query.transition || 'none'}
+        transitionEnterTimeout={150}
+        transitionLeaveTimeout={150}>
+        {React.cloneElement(children, {
+          key: location.pathname
+        })}
+      </ReactCSSTransitionGroup>
       <DevTools />
     </div>
   );
