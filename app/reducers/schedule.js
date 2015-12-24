@@ -1,4 +1,4 @@
-import { SCHEDULE, NEXT_SCHEDULE } from '../../common/action-types/schedule';
+import { SCHEDULE, SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
 import scheduler from '../../common/scheduler';
 import { initialState as settingsInitialState } from './settings';
 
@@ -14,7 +14,7 @@ export default function counter(state = initialState, action) {
       ...state,
       list: action.payload
     };
-  case NEXT_SCHEDULE:
+  case SET_SCHEDULE_INDEX:
     return {
       ...state,
       current: action.payload

@@ -1,4 +1,5 @@
 import { TIMER_TICK, TIMER_START, TIMER_PAUSE, TIMER_RESET } from '../../common/action-types/timer';
+import { SCHEDULE, SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
 
 export const initialState = {
   start: null,
@@ -19,6 +20,7 @@ export default function timer(state = initialState, action) {
       start: state.start ? state.start : new Date().getTime(),
       running: true
     };
+  case SET_SCHEDULE_INDEX:
   case TIMER_RESET:
     return {
       ...state,

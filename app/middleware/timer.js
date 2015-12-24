@@ -1,7 +1,7 @@
 import { tick } from '../actions/timer';
-import { nextSchedule } from '../actions/schedule';
+import { setScheduleIndex } from '../actions/schedule';
 import { TIMER_TICK } from '../../common/action-types/timer';
-import { NEXT_SCHEDULE } from '../../common/action-types/schedule';
+import { SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
 import { ipcRenderer } from 'electron';
 
 const timer = (store) => {
@@ -9,8 +9,8 @@ const timer = (store) => {
   ipcRenderer.on(TIMER_TICK, (event, payload) => {
     store.dispatch(tick(payload));
   });
-  ipcRenderer.on(NEXT_SCHEDULE, (event, payload) => {
-    store.dispatch(nextSchedule(payload));
+  ipcRenderer.on(SET_SCHEDULE_INDEX, (event, payload) => {
+    store.dispatch(setScheduleIndex(payload));
   });
 
   return (next) => (action) => {

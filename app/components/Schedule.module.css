@@ -7,6 +7,7 @@
   margin: 0 25vw;
   text-align: center;
   text-transform: uppercase;
+  cursor: default;
 }
 
 .current {

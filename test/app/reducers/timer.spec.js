@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import timer from '../../../app/reducers/timer';
 import { TIMER_START, TIMER_RESET } from '../../../common/action-types/timer';
+import { SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
 let internals;
 
 describe('timer', () => {
@@ -52,6 +53,22 @@ describe('timer', () => {
       const time = 120000;
       internals.clock.tick(time);
       const result = timer(timer.initialState, { type: TIMER_RESET });
+      expect(result.current).to.equal(time);
+    });
+  });
+
+  describe('SET_SCHEDULE_INDEX', () => {
+    it('sets start to the current time', () => {
+      const time = 120000;
+      internals.clock.tick(time);
+      const result = timer(timer.initialState, { type: SET_SCHEDULE_INDEX });
+      expect(result.start).to.equal(time);
+    });
+
+    it('sets current to the current time', () => {
+      const time = 120000;
+      internals.clock.tick(time);
+      const result = timer(timer.initialState, { type: SET_SCHEDULE_INDEX });
       expect(result.current).to.equal(time);
     });
   });

@@ -17,7 +17,7 @@ module.exports = function tick(event, state) {
     bus.emit(appActions.APP_TITLE, formatTime(timeLeft));
   } else {
     state.schedule.current = state.schedule.current === (state.schedule.list.length - 1) ? 0 : state.schedule.current + 1;
-    event.sender.send(scheduleActions.NEXT_SCHEDULE, state.schedule.current);
+    event.sender.send(scheduleActions.SET_SCHEDULE_INDEX, state.schedule.current);
     bus.emit(appActions.APP_NOTIFY, {
       title: 'Pomo',
       message: 'Time for ' + workTypeDisplay(state.schedule.list[state.schedule.current].type) + '!'
