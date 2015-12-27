@@ -83,7 +83,7 @@ class Settings extends Component {
               type="number"
               step="1"
               min="1"
-              max="6"
+              max="4"
               onChange={this.setSetCount.bind(this)}
               defaultValue={settings.setCount} />
           </label>
