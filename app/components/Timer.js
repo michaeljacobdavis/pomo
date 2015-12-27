@@ -6,7 +6,7 @@ import TitleBar from './TitleBar';
 import Schedule from './Schedule';
 import { Link } from 'react-router';
 
-const Timer = ({schedule, timer, timerStart, timerPause, timerReset}) => {
+const Timer = ({schedule, timer, timerStart, timerPause, timerReset, setScheduleIndex}) => {
   const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
 
   return (
@@ -29,7 +29,7 @@ const Timer = ({schedule, timer, timerStart, timerPause, timerReset}) => {
         {time}
       </div>
 
-      <Schedule schedule={schedule} />
+      <Schedule schedule={schedule} setScheduleIndex={setScheduleIndex} />
     </div>
   );
 };
@@ -38,6 +38,7 @@ Timer.propTypes = {
   timerStart: PropTypes.func.isRequired,
   timerPause: PropTypes.func.isRequired,
   timerReset: PropTypes.func.isRequired,
+  setScheduleIndex: PropTypes.func.isRequired,
   timer: PropTypes.object.isRequired,
   schedule: PropTypes.object.isRequired
 };

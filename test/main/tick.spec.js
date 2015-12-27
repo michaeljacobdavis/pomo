@@ -6,7 +6,7 @@ import tick from '../../main/tick';
 import bus from '../../main/event-bus';
 import { TIMER_TICK } from '../../common/action-types/timer';
 import { APP_TITLE, APP_NOTIFY } from '../../common/action-types/app';
-import { NEXT_SCHEDULE } from '../../common/action-types/schedule';
+import { SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
 
 chai.use(sinonChai);
 
@@ -84,11 +84,11 @@ describe('tick', () => {
       tick(internals.event, internals.state);
     });
 
-    it('emits a NEXT_SCHEDULE event on the event.sender', () => {
+    it('emits a SET_SCHEDULE_INDEX event on the event.sender', () => {
       const spy = internals.sandbox.spy(internals.event.sender, 'send');
       tick(internals.event, internals.state);
 
-      expect(spy).to.have.been.calledWith(NEXT_SCHEDULE, 1);
+      expect(spy).to.have.been.calledWith(SET_SCHEDULE_INDEX, 1);
     });
 
     describe('if on the last schedule event', () => {
@@ -96,12 +96,12 @@ describe('tick', () => {
         internals.clock.tick(1000);
       });
 
-      it('emits a NEXT_SCHEDULE event with the value of 0 on the event.sender', () => {
+      it('emits a SET_SCHEDULE_INDEX event with the value of 0 on the event.sender', () => {
         const spy = internals.sandbox.spy(internals.event.sender, 'send');
         internals.state.schedule.current = 1;
         tick(internals.event, internals.state);
 
-        expect(spy).to.have.been.calledWith(NEXT_SCHEDULE, 0);
+        expect(spy).to.have.been.calledWith(SET_SCHEDULE_INDEX, 0);
       });
     });
   });
