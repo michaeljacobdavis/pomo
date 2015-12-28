@@ -1,5 +1,7 @@
+/*eslint-env mocha */
+
 import { expect } from 'chai';
-import formatTime from '../../common/format-time';
+import formatTime from '../format-time';
 
 describe('formatTime', () => {
   it('formats aa duration of miliseconds to min:sec', () => {

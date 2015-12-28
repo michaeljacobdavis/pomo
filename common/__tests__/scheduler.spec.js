@@ -1,5 +1,7 @@
+/*eslint-env mocha */
+
 import { expect } from 'chai';
-import scheduler from '../../common/scheduler';
+import scheduler from '../scheduler';
 
 const options = {
   setCount: 4,

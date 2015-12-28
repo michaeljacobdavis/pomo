@@ -1,5 +1,7 @@
+/*eslint-env mocha */
+
 import { expect } from 'chai';
-import { miliToMin, minToMili } from '../../common/conversion';
+import { miliToMin, minToMili } from '../conversion';
 
 describe('conversion', () => {
   describe('miliToMin', () => {
