@@ -44,6 +44,7 @@
     "co-mocha": "^1.1.2",
     "css-loader": "^0.23.0",
     "css-modules-require-hook": "^2.0.2",
+    "deep-freeze": "0.0.1",
     "del": "^2.0.1",
     "electron-packager": "^5.0.2",
     "electron-prebuilt": "^0.35.2",
