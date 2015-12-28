@@ -7,6 +7,7 @@ const app = electron.app;
 
 const logger = new Winston.Logger({
   transports: [
+    new (Winston.transports.Console)(),
     new Loggly(pkg.loggly)
   ],
   rewriters: [ (level, msg, meta) => {

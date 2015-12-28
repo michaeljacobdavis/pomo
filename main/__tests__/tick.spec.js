@@ -1,4 +1,4 @@
-/*eslint-env mocha */
+/* eslint-env mocha */
 
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
@@ -50,7 +50,6 @@ describe('tick', () => {
   });
 
   describe('if time is left', () => {
-
     it('emits an APP_TITLE event on the global bus', (done) => {
       internals.clock.tick(1000);
 
@@ -76,7 +75,6 @@ describe('tick', () => {
     });
 
     it('emits a APP_NOTIFY event on the global bus', (done) => {
-
       bus.once(APP_NOTIFY, (notification) => {
         expect(notification.title).to.equal('Pomo');
         done();

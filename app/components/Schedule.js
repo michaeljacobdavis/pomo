@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './Schedule.module.css';
 import formatTime from '../../common/format-time';
 import workTypeDisplay from '../../common/work-type-display';
-
 
 const Schedule = ({schedule, setScheduleIndex}) => {
   return (

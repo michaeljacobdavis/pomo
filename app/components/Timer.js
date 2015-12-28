@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './Timer.module.css';
 import titleBarStyles from './TitleBar.module.css';
 import formatTime from '../../common/format-time';

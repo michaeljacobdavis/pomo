@@ -1,9 +1,9 @@
-/*eslint-env mocha */
+/* eslint-env mocha */
 
 import { expect } from 'chai';
 import sinon from 'sinon';
 import schedule from '../schedule';
-import { SCHEDULE, NEXT_SCHEDULE, SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
+import { SCHEDULE, SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
 let internals;
 
 describe('schedule reducer', () => {

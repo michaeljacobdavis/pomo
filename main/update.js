@@ -12,7 +12,6 @@ const updater = new GhReleases({
 });
 
 module.exports = function update(showAlert) {
-
   // Check for updates
   updater.check((err, status) => {
     if (!err && status) {
@@ -29,7 +28,7 @@ module.exports = function update(showAlert) {
     }
   });
 
-  updater.on('update-downloaded', (info) => {
+  updater.on('update-downloaded', () => {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -37,10 +36,10 @@ module.exports = function update(showAlert) {
       cancelId: 99,
       message: 'There is an update available. Would you like to update Pomo now?'
     }, (response) => {
-      console.log('Exit: ' + response);
+      logger.info('Exit: ' + response);
       if (response === 0) {
-        updater.install()
+        updater.install();
       }
     });
-  })
-}
+  });
+};

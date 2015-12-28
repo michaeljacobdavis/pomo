@@ -1,5 +1,5 @@
 import { TIMER_TICK, TIMER_START, TIMER_PAUSE, TIMER_RESET } from '../../common/action-types/timer';
-import { SCHEDULE, SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
+import { SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
 
 export const initialState = {
   start: null,
