@@ -1,8 +1,10 @@
+/* eslint-env mocha */
+
 import { expect } from 'chai';
 import sinon from 'sinon';
 import freeze from 'deep-freeze';
 import schedule, { initialState } from '../../../app/reducers/schedule';
-import { SCHEDULE, NEXT_SCHEDULE, SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
+import { SCHEDULE, SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
 let internals;
 
 before(() => {

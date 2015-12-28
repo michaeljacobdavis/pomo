@@ -1,4 +1,5 @@
-/* eslint no-unused-expressions: 0 */
+/* eslint-env mocha */
+
 import { expect } from 'chai';
 import sinon from 'sinon';
 import runner from '../../main/runner';

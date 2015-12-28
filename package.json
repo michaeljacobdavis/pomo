@@ -4,11 +4,11 @@
   "description": "Pomodoro Timer in Electron/React",
   "main": "main.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js $(find test -name '*.spec.js')",
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js $(find app main common -path '*/__tests__/*.spec.js')",
     "test-watch": "npm test -- --watch",
     "test-e2e:crdv": "chromedriver",
     "test-e2e": "NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
-    "lint": "eslint app test *.js",
+    "lint": "eslint app test common main *.js",
     "hot-server": "node server.js",
     "build": "NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
     "start": "electron .",

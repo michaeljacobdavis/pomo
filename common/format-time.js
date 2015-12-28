@@ -1,6 +1,6 @@
-module.exports = function formatTime(duration) {
-  'use strict';
+'use strict';
 
+module.exports = function formatTime(duration) {
   let seconds = Math.floor((duration / 1000) % 60);
   let minutes = Math.floor(duration / (1000 * 60));
 

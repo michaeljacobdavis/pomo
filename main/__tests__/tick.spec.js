@@ -1,9 +1,10 @@
-/* eslint no-unused-expressions: 0 */
+/* eslint-env mocha */
+
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
 import sinon from 'sinon';
-import tick from '../../main/tick';
-import bus from '../../main/event-bus';
+import tick from '../tick';
+import bus from '../event-bus';
 import { TIMER_TICK } from '../../common/action-types/timer';
 import { APP_TITLE, APP_NOTIFY } from '../../common/action-types/app';
 import { SET_SCHEDULE_INDEX } from '../../common/action-types/schedule';
@@ -49,7 +50,6 @@ describe('tick', () => {
   });
 
   describe('if time is left', () => {
-
     it('emits an APP_TITLE event on the global bus', (done) => {
       internals.clock.tick(1000);
 
@@ -75,7 +75,6 @@ describe('tick', () => {
     });
 
     it('emits a APP_NOTIFY event on the global bus', (done) => {
-
       bus.once(APP_NOTIFY, (notification) => {
         expect(notification.title).to.equal('Pomo');
         done();

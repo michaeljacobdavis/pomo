@@ -1,9 +1,12 @@
+/* eslint-env mocha */
+
 import { expect } from 'chai';
 import sinon from 'sinon';
 import freeze from 'deep-freeze';
 import timer, { initialState } from '../../../app/reducers/timer';
 import { TIMER_START, TIMER_RESET } from '../../../common/action-types/timer';
 import { SET_SCHEDULE_INDEX } from '../../../common/action-types/schedule';
+
 let internals;
 
 before(() => {

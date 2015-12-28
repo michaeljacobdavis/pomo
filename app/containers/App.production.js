@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { PropTypes} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const App = ({children, location}) => {
