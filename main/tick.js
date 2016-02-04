@@ -7,11 +7,10 @@ const appActions = require('../common/action-types/app');
 const formatTime = require('../common/format-time');
 const workTypeDisplay = require('../common/work-type-display');
 
-module.exports = function tick(event, state) {
-  state.timer.current = new Date().getTime();
-  const timeLeft = state.schedule.list[state.schedule.current].duration - (state.timer.current - state.timer.start);
+module.exports = function tick(event, state, interval) {
+  state.timer.current = state.timer.current + interval;
+  const timeLeft = state.schedule.list[state.schedule.current].duration - state.timer.current;
 
-  // If there is still time on the clock
   if (timeLeft > 0) {
     event.sender.send(timerActions.TIMER_TICK, state.timer);
     bus.emit(appActions.APP_TITLE, formatTime(timeLeft));
@@ -22,8 +21,8 @@ module.exports = function tick(event, state) {
       title: 'Pomo',
       message: 'Time for ' + workTypeDisplay(state.schedule.list[state.schedule.current].type) + '!'
     });
-    state.timer.start = new Date().getTime();
+    state.timer.current = 0;
 
-    tick(event, state);
+    tick(event, state, interval);
   }
 };

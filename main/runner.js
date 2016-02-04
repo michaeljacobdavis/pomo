@@ -4,13 +4,14 @@ const bus = require('./event-bus');
 const timerActions = require('../common/action-types/timer');
 const scheduleActions = require('../common/action-types/schedule');
 const appActions = require('../common/action-types/app');
+const intervalDelay = 1000;
 
 module.exports = function schedule(ipc, tick) {
   let interval;
 
   function handleEvent(event, state) {
     if (state.timer.running) {
-      const ticker = tick.bind(null, event, state);
+      const ticker = tick.bind(null, event, state, intervalDelay);
 
       // Init
       ticker();
@@ -19,7 +20,7 @@ module.exports = function schedule(ipc, tick) {
       handlePause();
 
       // Set Interval
-      interval = setInterval(ticker, 1000);
+      interval = setInterval(ticker, intervalDelay);
     }
   }
 

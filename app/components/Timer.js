@@ -7,7 +7,7 @@ import Schedule from './Schedule';
 import { Link } from 'react-router';
 
 const Timer = ({schedule, timer, timerStart, timerPause, timerReset, setScheduleIndex}) => {
-  const time = formatTime(schedule.list[schedule.current].duration - (timer.current - timer.start));
+  const time = formatTime(schedule.list[schedule.current].duration - timer.current);
 
   return (
     <div className={timer.running ? styles['container-running'] : styles['container-paused']}>
