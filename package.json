@@ -86,7 +86,7 @@
     "electron-gh-releases": "^2.0.2",
     "electron-positioner": "^2.0.2",
     "font-awesome": "^4.4.0",
-    "history": "1.13.1",
+    "history": "^1.17.0",
     "lodash.times": "^3.0.3",
     "node-notifier": "^4.4.0",
     "react": "^0.14.2",
@@ -103,7 +103,6 @@
   "devEngines": {
     "node": "5.x"
   },
-  "repo": "michaeljacobdavis/pomo",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/michaeljacobdavis/pomo.git"
