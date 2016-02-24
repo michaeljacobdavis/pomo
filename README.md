@@ -2,6 +2,8 @@
 
 Simple menu bar Pomodoro timer built with Electron, React and Redux.
 
+![Demo](demo.gif)
+
 
 ## Development
 
